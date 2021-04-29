@@ -1,0 +1,20 @@
+version: '2'
+services:
+  alertmanager-to-telegram:
+    image: shalb/alertmanager-to-telegram:0.0.1
+    volumes:
+      - ./exporter:/opt/exporter
+    restart: always
+    ports:
+      - "127.0.0.1:9647:9647"
+    environment:
+     #- URL=https://api.telegram.org/
+      - API_KEY=bot000000000:AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+      - CHAT_ID=-000000000
+     #- TEST_ALERTS_OPEN=test_alerts_open.json
+     #- TEST_ALERTS_CLOSE=test_alerts_close.json
+     #- LOG_LEVEL=INFO|DEBUG
+     #- ALERT_TO_TELEGRAM_TIMEOUT=10
+     #- MAIN_LOOP_SLEEP_INTERVAL=10
+     #- LISTEN_PORT=9647
+   #entrypoint: ["/bin/bash", "-c", "sleep 9999"]

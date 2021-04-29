@@ -1,0 +1,7 @@
+version: '2'
+services:
+  alertmanager-to-telegram:
+    build:
+      context: ./
+    image: shalb/alertmanager-to-telegram:0.0.1
+
