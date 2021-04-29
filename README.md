@@ -29,6 +29,14 @@ customize your configuration via environment variables (see example in `docker-c
 docker-compose up
 ~~~~
 
+## prepare helm chart
+
+~~~~
+helm package examples/helmfile/alertmanager-to-telegram/
+mv alertmanager-to-telegram-0.0.1.tgz charts/
+helm repo index charts --url https://raw.githubusercontent.com/shalb/alertmanager-to-telegram/main/charts/
+~~~~
+
 ## dependencies if want to run without container
 
 ~~~~

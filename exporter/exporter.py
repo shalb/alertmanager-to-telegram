@@ -59,8 +59,10 @@ def create_allert_message(post_data):
     for alert in post_data['alerts']:
         message.append('Status: {}'.format(alert['status']))
         message.append('Alertname: {}'.format(alert['labels']['alertname']))
-        message.append('Instance: {}'.format(alert['labels']['instance']))
-        message.append('Job: {}'.format(alert['labels']['job']))
+        if alert['labels'].get('instance'):
+            message.append('Instance: {}'.format(alert['labels']['instance']))
+        if alert['labels'].get('job'):
+            message.append('Job: {}'.format(alert['labels']['job']))
         message.append('Annotations:')
         for key in alert['annotations']:
             message.append('    {}: {}'.format(key, alert['annotations'][key]))

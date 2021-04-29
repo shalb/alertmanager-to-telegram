@@ -15,7 +15,6 @@ spec:
         role: monitoring
         app: alertmanager-to-telegram
     spec:
-      serviceAccountName: alertmanager-to-telegram
       containers:
         - name: alertmanager-to-telegram
           image: shalb/alertmanager-to-telegram:0.0.1
@@ -37,3 +36,18 @@ spec:
               value: "{{ .Values.chat_id }}"
             - name: LOG_LEVEL
               value: "{{ .Values.log_level }}"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: alertmanager-to-telegram
+  labels:
+    app: alertmanager-to-telegram
+spec:
+  selector:
+    app: alertmanager-to-telegram
+  ports:
+    - name: metrics
+      protocol: TCP
+      port: 9647
+      targetPort: 9647
