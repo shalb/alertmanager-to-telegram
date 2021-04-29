@@ -1,4 +1,4 @@
 url: https://api.telegram.org/
-api_key: bot000000000:AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-chat_id: -000000000
+api_key: 'bot000000000:AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'
+chat_id: '-000000000'
 log_level: INFO
