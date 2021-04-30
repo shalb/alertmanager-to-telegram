@@ -34,6 +34,8 @@ spec:
               value: "{{ .Values.api_key }}"
             - name: CHAT_ID
               value: "{{ .Values.chat_id }}"
+            - name: KEYS_TO_EXCLUDE
+              value: "{{ .Values.keys_to_exclude }}"
             - name: LOG_LEVEL
               value: "{{ .Values.log_level }}"
 ---
