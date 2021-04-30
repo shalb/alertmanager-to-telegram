@@ -17,6 +17,12 @@ def get_config():
     conf['log_level'] = 'INFO'
     conf['test_alerts_open'] = ''
     conf['test_alerts_close'] = ''
+    conf['keys_to_exclude'] = list()
+    env_lists_options = ['keys_to_exclude']
+    for opt in env_lists_options:
+        opt_val = os.environ.get(opt.upper())
+        if opt_val:
+            conf[opt] = opt_val.split()
     env_text_options = ['url', 'api_key', 'log_level', 'test_alerts_open', 'test_alerts_close']
     for opt in env_text_options:
         opt_val = os.environ.get(opt.upper())
@@ -65,14 +71,18 @@ def create_allert_message(post_data):
             message.append('Job: {}'.format(alert['labels']['job']))
         message.append('Annotations:')
         for key in alert['annotations']:
+            if key in conf['keys_to_exclude']:
+                continue
             message.append('    {}: {}'.format(key, alert['annotations'][key]))
         message.append('Labels:')
         for key in alert['labels']:
-            if key in ['alertname', 'instance', 'job']:
+            if key in ['alertname', 'instance', 'job'] + conf['keys_to_exclude']:
                 continue
             message.append('    {}: {}'.format(key, alert['labels'][key]))
-        message.append('Generator URL: {}'.format(alert['generatorURL']))
-    message.append('External URL: {}'.format(post_data['externalURL']))
+        if 'generatorURL' not in conf['keys_to_exclude']:
+            message.append('Generator URL: {}'.format(alert['generatorURL']))
+    if 'externalURL' not in conf['keys_to_exclude']:
+        message.append('External URL: {}'.format(post_data['externalURL']))
     message = '\n'.join(message)
     log.debug('Message to push: "{}"'.format(message))
     return message

@@ -11,6 +11,7 @@ services:
      #- URL=https://api.telegram.org/
       - API_KEY=bot000000000:AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
       - CHAT_ID=-000000000
+     #- KEYS_TO_EXCLUDE=runbook_url externalURL generatorURL
      #- TEST_ALERTS_OPEN=test_alerts_open.json
      #- TEST_ALERTS_CLOSE=test_alerts_close.json
      #- LOG_LEVEL=INFO|DEBUG
